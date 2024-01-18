@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wdth,wght@0,6..12,75..125,200..1000;1,6..12,75..125,200..1000&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Rick and Morty</title>
+  </head>
+  <body>
+    <header class="header__container">
+      <img class="header__image" src="assets/logo.png" />
+
+      <ul class="header-list__container">
+        <li class="header-list__item">Episodes</li>
+        <li class="header-list__item">Characters</li>
+        <li class="header-list__item">Locations</li>
+      </ul>
+    </header>
+    <main class="main-view">
+      <section class="episodes-list__container">
+        <h3>Episodes</h3>
+        <ul class="episodes-list" data-episodes-container>
+
+        </ul>
+        <button>Load more episodes</button>
+      </section>
+      <section class="episode-detail">
+        <h2 data-episode-number></h2>
+        <p data-episode-date-code></p>
+        <div class="characters__container" data-characters-container>
+
+        </div>
+      </section>
+    </main>
+    <script src="dist/main.js" type="module" ></script>
+  </body>
+</html>

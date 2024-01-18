@@ -1,0 +1,14 @@
+@import url(colors.css);
+@import url(header.css);
+@import url(episodeList.css);
+@import url(episodeDetail.css);
+
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+.main-view{
+    display: flex;
+}

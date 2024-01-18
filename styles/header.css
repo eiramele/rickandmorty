@@ -1,0 +1,24 @@
+
+
+.header__container{
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--header-background-color);
+    
+}
+
+.header__image{
+    /* height: %; */
+    width: 10rem ;
+}
+
+
+.header-list__container{
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.header-list__item{
+    list-style: none;
+}

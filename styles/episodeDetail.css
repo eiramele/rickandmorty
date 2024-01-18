@@ -1,0 +1,23 @@
+.episode-detail{
+    padding-left: 2rem;
+}
+
+.characters__container{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.character-item{
+    width: 8rem;
+    padding: 0.5rem;
+    border: solid var(--fifth-color-dark) 0.1rem;
+    border-radius: 10%;
+}
+
+.character-image{
+    height: 5rem;
+    width: 5rem;
+    align-items: center;
+    
+}
