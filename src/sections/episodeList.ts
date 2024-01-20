@@ -2,7 +2,7 @@ import { Episode } from "../interfaces/interfaces.js";
 import {
   showingCharactersbyEpisode,
   showingEpisodeInfo,
-} from "./characterDetail.js";
+} from "./charactersList.js";
 
 import { episode2URL, episode3URL, episodeListContainer, moreEpisodesButton } from "../variables/globalVariables.js"
 
@@ -24,7 +24,7 @@ export async function showingEpisodesList(url: string) {
     if (!episodes) return;
 
     episodes.forEach((episode) => {
-      console.log(episode.id);
+      //console.log(episode.id);
       const li = document.createElement("li");
       li.className = "episode-item";
       li.id = `${episode.id}`;

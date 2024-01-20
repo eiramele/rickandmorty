@@ -2,6 +2,7 @@
 @import url(header.css);
 @import url(episodeList.css);
 @import url(episodeDetail.css);
+@import url(characterExtendedDetail.css);
 
 body {
   font-family: "Roboto", sans-serif;
