@@ -1,25 +1,33 @@
 .episodes-list__container {
-    padding-left: 2rem;
-    padding-right: 1rem;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--fourth-color);
-    width: 10rem;
-    min-height: 100vh;
-    min-width: 10rem;
-  }
-  
-  .episodes-list {
-    padding-left: 0;
-  }
-  
-  .episode-item {
-    list-style: square;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  
-  .episode-item:hover {
-    color: var(--second-color);
-  }
-  
+  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* background-color: var(--fourth-color); */
+  width: 10rem;
+  max-height: 40rem;
+  min-width: 10rem;
+  overflow-y: auto;
+}
+
+.episodes-list {
+  padding-left: 0;
+}
+
+.episode-item {
+  list-style: square;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.episode-item:hover {
+  color: var(--second-color);
+}
+
+.episodes-button {
+  background-color: var(--fifth-color-dark); 
+  color: var(--fourth-color);
+  min-height: 2rem;
+  border-radius: 0.8rem;
+}

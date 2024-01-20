@@ -1,8 +1,12 @@
 :root {
-  background-color: #b4df77;
+  /* background-color: #b4df77; */
   --header-background-color: #5d8f21;
+  --body-background-color: #19ff50;
   --second-color: #3b571d;
   --thrid-color: #476d1e;
   --fourth-color: #d2eda9;
   --fifth-color-dark: #334b1c;
+  --text-color: #c8a2c8;
+  --second-text-color: #7df9ff;
+  --border-color: #00ffff;
 }
