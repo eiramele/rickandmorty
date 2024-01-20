@@ -1,5 +1,6 @@
 .episode-detail{
     padding-left: 2rem;
+    color: var(--header-background-color);
 }
 
 .characters__container{
@@ -21,3 +22,4 @@
     align-items: center;
     
 }
+

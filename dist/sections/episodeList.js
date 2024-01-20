@@ -7,10 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { showingCharactersbyEpisode, showingEpisodeInfo, } from "../components/characterDetail.js";
-const episode1UrL = "https://rickandmortyapi.com/api/episode";
-const episode2UrL = "https://rickandmortyapi.com/api/episode?page=2";
-const episode3UrL = "https://rickandmortyapi.com/api/episode?page=3";
+import { showingCharactersbyEpisode, showingEpisodeInfo, } from "./characterDetail.js";
+import { episode2URL, episode3URL, episodeListContainer, moreEpisodesButton } from "../variables/globalVariables.js";
 export function callingEpisodes(url) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -30,7 +28,6 @@ export function showingEpisodesList(url) {
             const episodes = yield callingEpisodes(url);
             if (!episodes)
                 return;
-            const episodeListContainer = document.querySelector("[data-episodes-container]");
             episodes.forEach((episode) => {
                 console.log(episode.id);
                 const li = document.createElement("li");
@@ -64,15 +61,13 @@ export function handleClick(event, url) {
 export function loadingMoreEpisodes() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const episodeListContainer = document.querySelector("[data-episodes-container]");
             const lastElement = episodeListContainer.lastElementChild;
-            const moreEpisodesButton = document.querySelector("[data-episodes-button]");
             if (lastElement instanceof HTMLLIElement && lastElement.id === "20") {
-                showingEpisodesList(episode2UrL);
+                showingEpisodesList(episode2URL);
             }
             else if (lastElement instanceof HTMLLIElement &&
                 lastElement.id === "40") {
-                showingEpisodesList(episode3UrL);
+                showingEpisodesList(episode3URL);
                 if (moreEpisodesButton instanceof HTMLButtonElement) {
                     moreEpisodesButton.disabled = true;
                 }

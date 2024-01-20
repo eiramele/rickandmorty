@@ -7,7 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { callingEpisodes } from "../pages/episodeList.js";
+import { callingEpisodes } from "./episodeList.js";
+import { charactersContainer, episodeNumber, episodeDate } from "../variables/globalVariables.js";
 export function callingOneCharacter(character) {
     return __awaiter(this, void 0, void 0, function* () {
         const responseCharacter = yield fetch(character);
@@ -18,7 +19,6 @@ export function callingOneCharacter(character) {
     });
 }
 export function showingCharacterInfo(character) {
-    const charactersContainer = document.querySelector("[data-characters-container]");
     const characterItem = document.createElement("div");
     characterItem.className = "character-item";
     const characterImg = document.createElement("img");
@@ -39,8 +39,6 @@ export function showingEpisodeInfo(id, url) {
             const episodes = yield callingEpisodes(url);
             if (!episodes)
                 return;
-            const episodeNumber = document.querySelector("[data-episode-number]");
-            const episodeDate = document.querySelector("[data-episode-date-code]");
             episodes.forEach((episode) => {
                 if (episode.id === id &&
                     episodeNumber instanceof HTMLHeadingElement &&
@@ -60,7 +58,6 @@ export function showingCharactersbyEpisode(id, url) {
         const response = yield fetch(url);
         const data = yield response.json();
         const episodes = data.results;
-        const charactersContainer = document.querySelector("[data-characters-container]");
         if (charactersContainer instanceof HTMLDivElement) {
             charactersContainer.textContent = "";
         }
