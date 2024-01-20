@@ -1,6 +1,13 @@
 .episode-detail{
     padding-left: 2rem;
     color: var(--header-background-color);
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.episode-detail__container{
+    min-width: 7rem;
 }
 
 .characters__container{
@@ -23,3 +30,7 @@
     
 }
 
+.character-name:hover{
+    cursor: pointer;
+    color: var(--second-color) ;
+}

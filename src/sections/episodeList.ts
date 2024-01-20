@@ -2,10 +2,15 @@ import { Episode } from "../interfaces/interfaces.js";
 import {
   showingCharactersbyEpisode,
   showingEpisodeInfo,
-} from "./charactersList.js";
+} from "./episodeDetail.js";
 
-import { episode2URL, episode3URL, episodeListContainer, moreEpisodesButton } from "../variables/globalVariables.js"
-
+import {
+  episode2URL,
+  episode3URL,
+  episodeListContainer,
+  moreEpisodesButton,
+  mainContainer,
+} from "../variables/globalVariables.js";
 
 export async function callingEpisodes(url: string) {
   try {
@@ -24,19 +29,19 @@ export async function showingEpisodesList(url: string) {
     if (!episodes) return;
 
     episodes.forEach((episode) => {
-      //console.log(episode.id);
       const li = document.createElement("li");
       li.className = "episode-item";
       li.id = `${episode.id}`;
       li.setAttribute("data-episode", "");
       li.textContent = `Episode ${episode.id}`;
-      li.addEventListener("click", (event) => handleClick(event, url));
+      console.log(episode.url);
+      li.addEventListener("click", (event) => handleClick(event, episode.url)); //url
       if (episodeListContainer instanceof HTMLUListElement) {
         episodeListContainer.appendChild(li);
       }
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -44,21 +49,18 @@ export function handleClick(event: MouseEvent, url: string) {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;
 
-  const id = parseInt(target.id, 10);
-  if (isNaN(id)) {
-    console.error("Invalid ID");
-    return;
+  if (mainContainer instanceof HTMLDivElement) {
+    mainContainer.textContent = "";
   }
 
-  showingEpisodeInfo(id, url);
-  showingCharactersbyEpisode(id, url);
+  showingEpisodeInfo(url);
+  showingCharactersbyEpisode(url);
 }
 
 export async function loadingMoreEpisodes() {
   try {
-
     const lastElement = episodeListContainer.lastElementChild;
-    
+
     if (lastElement instanceof HTMLLIElement && lastElement.id === "20") {
       showingEpisodesList(episode2URL);
     } else if (

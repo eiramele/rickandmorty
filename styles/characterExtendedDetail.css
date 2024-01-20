@@ -1,22 +1,45 @@
+.character-detail-item {
+  display: flex;
+  
+}
 
-.character-detail-item{
+.character-detail-image {
+  height: 10rem;
+  width: 10rem;
+  margin-top: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.character-description__container {
+  display: flex;
+  flex-direction: column;
+}
+.character-more-details__container {
+  display: flex;
+}
+
+.character-location{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.character-location:hover{
+  color: var(--second-color) 
+}
+
+.all-episodes__container{
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
 }
 
-.character-detail-image{
-    height: 10rem;
-    width: 10rem;
-    margin: 1.5rem;
+.episode-name {
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.character-description__container{
-    display: flex;
-    flex-direction: column;
-}
-.character-more-details__container{
-    display: flex;
+.episode-name:hover{
+  color: var(--second-color);
 }
 
-.preserve-spaces {
-    white-space: pre;
-  }
