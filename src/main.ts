@@ -1,17 +1,6 @@
+import { showEpisodesList } from "./sections/episodeList.js";
 
-import {
-  showingEpisodesList,
-  loadingMoreEpisodes,
+import { episode1URL } from "./variables/globalConst.js";
 
-} from "./sections/episodeList.js";
+showEpisodesList(episode1URL);
 
-import { episode1URL } from "./variables/globalVariables.js";
-
-
-showingEpisodesList(episode1URL);
-
-const moreEpisodesButton = document.querySelector(
-  "[data-episodes-button]"
-) as HTMLButtonElement;
-
-moreEpisodesButton.addEventListener("click", loadingMoreEpisodes);

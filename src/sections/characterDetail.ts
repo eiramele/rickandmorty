@@ -3,19 +3,21 @@ import {
   Episode,
   ExtendedCharacter,
 } from "../interfaces/interfaces.js";
+import { getEpisode } from "../rmAPI.js";
+import { mainContainer } from "../variables/globalConst.js";
+import { handleEpisodeClick } from "./episodeList.js";
+import { showLocation } from "./locationDetail.js";
+
 import {
-  mainContainer,
+  characterDescription,
   characterListContainer,
-} from "../variables/globalVariables.js";
-import { handleClick } from "./episodeList.js";
-import { callingOneLocation } from "./locationDetail.js";
+  allEpisodesContainer,
+} from "../variables/domElements.js";
 
-const characterDescription = document.createElement("div");
-characterDescription.className = "character-detail-item";
-const allEpisodesContainer = document.createElement("div");
-allEpisodesContainer.className = "all-episodes__container";
 
-export function showingExtendedCharacterInfo(character: Character) {
+
+//Creates HTML elements to show extendended character information 
+export function showExtendedCharacterInfo(character: Character) {
   const extendedCharacter = character as ExtendedCharacter;
 
   const characterDetailImg = document.createElement("img");
@@ -49,11 +51,11 @@ export function showingExtendedCharacterInfo(character: Character) {
   );
   if (extendedCharacter.origin) {
     const characterDetailOrigin = document.createElement("span");
-    
+
     characterDetailOrigin.textContent = `| ${extendedCharacter.origin.name}`;
     characterMoreDetailsContainer.appendChild(characterDetailOrigin);
     if (extendedCharacter.origin.name != "unknown") {
-      characterDetailOrigin.className = "character-location"
+      characterDetailOrigin.className = "character-location";
       characterDetailOrigin.addEventListener("click", (event) => {
         characterListContainer.textContent = "";
         handleLocationClick(event, extendedCharacter.origin.url);
@@ -62,9 +64,9 @@ export function showingExtendedCharacterInfo(character: Character) {
   }
 
   const characterEpisodes = extendedCharacter.episode;
-  
+
   allEpisodesContainer.textContent = "";
-  characterEpisodes.forEach((episode) => callingOneEpisode(episode));
+  characterEpisodes.forEach((episode) => showEpisodesbyCharacter(episode));
 
   characterDescriptionDetails.append(
     characterDetailName,
@@ -83,25 +85,25 @@ export function showingExtendedCharacterInfo(character: Character) {
   }
 }
 
-export async function callingOneEpisode(episode: string) {
-  const responseEpisode = await fetch(episode);
-  const dataEpisode = await responseEpisode.json();
-  const oneEpisode: Episode = dataEpisode;
-  //console.log(oneCharacter.name);
-
-  showingEpisodesInfo(oneEpisode);
+// Shows all episoded where that character appears on
+export async function showEpisodesbyCharacter(url: string) {
+  const episode = await getEpisode(url);
+  if (!episode) return;
+  showEpisodeInfo(episode);
 }
 
-export function showingEpisodesInfo(episode: Episode) {
+
+//Create HTML elements to print episode number and code
+export function showEpisodeInfo(episode: Episode) {
   const episodeDetailContainer = document.createElement("div");
   episodeDetailContainer.className = "episode-detail__container";
   episodeDetailContainer.id = `${episode.id}`;
 
   const episodeNumber = document.createElement("p");
   episodeNumber.className = "episode-name";
-  episodeNumber.addEventListener("click", (event) =>{
-    console.log('ariadna');
-    handleClick(event, episode.url)})
+  episodeNumber.addEventListener("click", (event) => {
+    handleEpisodeClick(event, episode.url);
+  });
   episodeNumber.id = `${episode.id}`;
   episodeNumber.textContent = `Episode ${episode.id}`;
 
@@ -116,8 +118,9 @@ export function showingEpisodesInfo(episode: Episode) {
   }
 }
 
+//Handles click to show location information
 export function handleLocationClick(event: MouseEvent, url: string) {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;
-  callingOneLocation(url);
+  showLocation(url);
 }

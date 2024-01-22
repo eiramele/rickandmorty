@@ -1,12 +1,12 @@
 :root {
   /* background-color: #b4df77; */
-  --header-background-color: #5d8f21;
-  --body-background-color: #19ff50;
-  --second-color: #3b571d;
+  --header-background-color: #9DBC98;
+  --body-background-color: #F9EFDB;
+  --text-color: #1E5457;
+  --second-text-color: #43766C;  
   --thrid-color: #476d1e;
-  --fourth-color: #d2eda9;
+  --fourth-color: #EBD9B4;
   --fifth-color-dark: #334b1c;
-  --text-color: #c8a2c8;
-  --second-text-color: #7df9ff;
-  --border-color: #00ffff;
 }
+
+ 

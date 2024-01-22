@@ -1,25 +1,66 @@
 import {
   Character,
-  ExtendedCharacter,
   Episode,
 } from "interfaces/interfaces.js";
 import { callingOneEpisode } from "./characterDetail.js";
 import {
   mainContainer,
   characterListContainer,
-} from "../variables/globalVariables.js";
+} from "../variables/globalConst.js";
 
-import { showingExtendedCharacterInfo } from "./characterDetail.js";
+import { showExtendedCharacterInfo } from "./characterDetail.js";
+import { getCharacter, getEpisode } from "../rmAPI.js";
 
-export async function callingOneCharacter(character: string) {
-  const responseCharacter = await fetch(character);
-  const dataCharacter = await responseCharacter.json();
-  const oneCharacter: Character = dataCharacter;
-  //console.log(oneCharacter.name);
-  showingCharacterInfo(oneCharacter);
+//Gets all characters that appear in a single episode and prints its details
+export async function showCharactersbyEpisode(url: string) {
+
+  const episode = await getEpisode(url);
+  if (!episode) return 
+  
+  characterListContainer.textContent = "";
+  
+  if (
+    mainContainer instanceof HTMLDivElement &&
+    characterListContainer instanceof HTMLDivElement
+  ) {
+    mainContainer.append(characterListContainer);
+  }
+  console.log(episode.characters);
+  episode.characters.forEach((character) => {
+    showCharacter(character);
+  });
 }
 
-export function showingCharacterInfo(character: Character) {
+//Gets episode Info and shows it
+export async function showEpisodeInfo(url: string) {
+  const episode = await getEpisode(url);
+  if (!episode) return;
+
+  createEpisodeCard(episode);
+}
+
+//Creates html elements to print episode ID, air date and code
+export function createEpisodeCard(episode: Episode) {
+  const episodeNumber = document.createElement("h2");
+  episodeNumber.textContent = `Episode ${episode.id}`;
+
+  const episodeDate = document.createElement("p");
+  episodeDate.textContent = `${episode.air_date} | ${episode.episode}`;
+
+  if (mainContainer instanceof HTMLDivElement) {
+    mainContainer.append(episodeNumber, episodeDate);
+  }
+}
+
+// Gets characther info and prints it
+export async function showCharacter(url: string) {
+  const character = await getCharacter(url);
+  if (!character) return;
+  createCharacterCard(character);
+}
+
+//Creates a card for each character including information such as name, image and gender
+export function createCharacterCard(character: Character) {
   const characterItem = document.createElement("div");
   characterItem.className = "character-item";
 
@@ -35,6 +76,7 @@ export function showingCharacterInfo(character: Character) {
   );
 
   const characterGender = document.createElement("p");
+  characterGender.className = "character-gender";
   characterGender.textContent = `${character.species} | ${character.status}`;
 
   characterItem.append(characterImg, characterName, characterGender);
@@ -44,63 +86,7 @@ export function showingCharacterInfo(character: Character) {
   }
 }
 
-export async function showingEpisodeInfo(url: string) {
-  //id: number,
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const episode: Episode = data;
-    // if (!episodes) return;
-    // console.log('eira');
-    const episodeNumber = document.createElement("h2");
-    episodeNumber.textContent = `Episode ${episode.id}`;
 
-    const episodeDate = document.createElement("p");
-    episodeDate.textContent = `${episode.air_date} | ${episode.episode}`;
-    
-    if (mainContainer instanceof HTMLDivElement){
-    mainContainer.append(episodeNumber, episodeDate)};
-
-    // episodes.forEach((episode) => {
-    //   if (episode.id === id && mainContainer instanceof HTMLDivElement) {
-    //     mainContainer.textContent = "";
-    //
-
-    //     const episodeDate = document.createElement("p");
-    //     episodeDate.textContent = `${episode.air_date} | ${episode.episode}`;
-
-    //     mainContainer.append(episodeNumber, episodeDate);
-    //   }
-    // });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function showingCharactersbyEpisode(url: string) {
-  //id: number
-  const response = await fetch(url);
-  const data = await response.json();
-  const episode: Episode = data;
-  characterListContainer.textContent = "";
-  if (
-    mainContainer instanceof HTMLDivElement &&
-    characterListContainer instanceof HTMLDivElement
-  ) {
-    mainContainer.append(characterListContainer);
-  }
-  console.log(episode.characters);
-  episode.characters.forEach((character) => {
-    callingOneCharacter(character);
-  });
-
-  // episodes.forEach((episode) => {
-  //   if (episode.id === id) {
-  //     episode.characters.forEach
-  //     });
-  //   }
-  // });
-}
 
 export function handleCharacterClick(event: MouseEvent, character: Character) {
   const target = event.target;
@@ -109,11 +95,5 @@ export function handleCharacterClick(event: MouseEvent, character: Character) {
   if (mainContainer instanceof HTMLDivElement) {
     mainContainer.textContent = "";
   }
-  showingExtendedCharacterInfo(character);
+  showExtendedCharacterInfo(character);
 }
-
-// <h2 data-episode-number></h2>
-// <p data-episode-date-code></p>
-// <div class="characters__container" data-characters-container>
-
-// </div>

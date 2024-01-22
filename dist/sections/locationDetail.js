@@ -7,30 +7,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { mainContainer } from "../variables/globalVariables.js";
-import { callingOneCharacter } from "./episodeDetail.js";
-import { characterListContainer } from "../variables/globalVariables.js";
-export function callingOneLocation(location) {
+import { mainContainer } from "../variables/globalConst.js";
+import { showCharacter } from "./episodeDetail.js";
+import { characterListContainer } from "../variables/globalConst.js";
+import { getLocation } from "../rmAPI.js";
+export function showLocation(url) {
     return __awaiter(this, void 0, void 0, function* () {
-        const responseLocation = yield fetch(location);
-        const dataLocation = yield responseLocation.json();
-        const origin = dataLocation;
-        console.log(origin);
-        showingLocationInfo(origin);
+        const origin = yield getLocation(url);
+        if (!origin)
+            return;
+        createLocationCard(origin);
         characterListContainer.textContent = "";
         if (mainContainer instanceof HTMLDivElement &&
             characterListContainer instanceof HTMLDivElement) {
             mainContainer.append(characterListContainer);
         }
-        origin.residents.forEach((resident) => callingOneCharacter(resident));
+        origin.residents.forEach((resident) => showCharacter(resident));
     });
 }
-export function showingLocationInfo(location) {
+export function createLocationCard(location) {
     const locationDetailName = document.createElement("h2");
     locationDetailName.className = "location-detail-name";
     locationDetailName.textContent = location.name;
     const locationMoreDetailsContainer = document.createElement("div");
-    locationMoreDetailsContainer.className = "location-more-details__container", "preserve-spaces";
+    (locationMoreDetailsContainer.className = "location-more-details__container"),
+        "preserve-spaces";
     const locationDetailType = document.createElement("span");
     locationDetailType.textContent = ` ${location.type} | `;
     const locationDetailDimension = document.createElement("span");

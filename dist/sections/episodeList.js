@@ -7,66 +7,54 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { showingCharactersbyEpisode, showingEpisodeInfo, } from "./episodeDetail.js";
-import { episode2URL, episode3URL, episodeListContainer, moreEpisodesButton, mainContainer, } from "../variables/globalVariables.js";
-export function callingEpisodes(url) {
+import { showCharactersbyEpisode, showEpisodeInfo, } from "./episodeDetail.js";
+import { episode2URL, episode3URL } from "../variables/globalConst.js";
+import { episodeListContainer, moreEpisodesButton, mainContainer, } from "../variables/domElements.js";
+import { getEpisodes } from "../rmAPI.js";
+export function showEpisodesList(url) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch(url);
-            const data = yield response.json();
-            const episodes = data.results;
-            return episodes;
-        }
-        catch (error) {
-            console.log(error);
+        const episodes = yield getEpisodes(url);
+        if (!episodes)
+            return;
+        createEpisodeListElement(episodes);
+    });
+}
+function createEpisodeListElement(episodes) {
+    episodes.forEach((episode) => {
+        const li = document.createElement("li");
+        li.className = "episode-item";
+        li.id = `${episode.id}`;
+        li.setAttribute("data-episode", "");
+        li.textContent = `Episode ${episode.id}`;
+        console.log(episode.url);
+        li.addEventListener("click", (event) => handleEpisodeClick(event, episode.url));
+        if (episodeListContainer instanceof HTMLUListElement) {
+            episodeListContainer.appendChild(li);
         }
     });
 }
-export function showingEpisodesList(url) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const episodes = yield callingEpisodes(url);
-            if (!episodes)
-                return;
-            episodes.forEach((episode) => {
-                const li = document.createElement("li");
-                li.className = "episode-item";
-                li.id = `${episode.id}`;
-                li.setAttribute("data-episode", "");
-                li.textContent = `Episode ${episode.id}`;
-                console.log(episode.url);
-                li.addEventListener("click", (event) => handleClick(event, episode.url));
-                if (episodeListContainer instanceof HTMLUListElement) {
-                    episodeListContainer.appendChild(li);
-                }
-            });
-        }
-        catch (error) {
-            console.error(error);
-        }
-    });
-}
-export function handleClick(event, url) {
+export function handleEpisodeClick(event, url) {
     const target = event.target;
     if (!(target instanceof HTMLElement))
         return;
     if (mainContainer instanceof HTMLDivElement) {
         mainContainer.textContent = "";
     }
-    showingEpisodeInfo(url);
-    showingCharactersbyEpisode(url);
+    showEpisodeInfo(url);
+    showCharactersbyEpisode(url);
 }
-export function loadingMoreEpisodes() {
+export function loadMoreEpisodes() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const lastElement = episodeListContainer.lastElementChild;
             if (lastElement instanceof HTMLLIElement && lastElement.id === "20") {
-                showingEpisodesList(episode2URL);
+                showEpisodesList(episode2URL);
             }
             else if (lastElement instanceof HTMLLIElement &&
                 lastElement.id === "40") {
-                showingEpisodesList(episode3URL);
+                showEpisodesList(episode3URL);
                 if (moreEpisodesButton instanceof HTMLButtonElement) {
+                    moreEpisodesButton.className = "button-disabled";
                     moreEpisodesButton.disabled = true;
                 }
             }
@@ -76,4 +64,8 @@ export function loadingMoreEpisodes() {
         }
     });
 }
+if (moreEpisodesButton instanceof HTMLButtonElement) {
+    moreEpisodesButton.addEventListener("click", loadMoreEpisodes);
+}
+;
 //# sourceMappingURL=episodeList.js.map

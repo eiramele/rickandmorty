@@ -7,14 +7,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { mainContainer, characterListContainer, } from "../variables/globalVariables.js";
-import { handleClick } from "./episodeList.js";
-import { callingOneLocation } from "./locationDetail.js";
-const characterDescription = document.createElement("div");
-characterDescription.className = "character-detail-item";
-const allEpisodesContainer = document.createElement("div");
-allEpisodesContainer.className = "all-episodes__container";
-export function showingExtendedCharacterInfo(character) {
+import { getEpisode } from "../rmAPI.js";
+import { mainContainer } from "../variables/globalConst.js";
+import { handleEpisodeClick } from "./episodeList.js";
+import { showLocation } from "./locationDetail.js";
+import { characterDescription, characterListContainer, allEpisodesContainer, } from "../variables/domElements.js";
+export function showExtendedCharacterInfo(character) {
     const extendedCharacter = character;
     const characterDetailImg = document.createElement("img");
     characterDetailImg.className = "character-detail-image";
@@ -48,7 +46,7 @@ export function showingExtendedCharacterInfo(character) {
     }
     const characterEpisodes = extendedCharacter.episode;
     allEpisodesContainer.textContent = "";
-    characterEpisodes.forEach((episode) => callingOneEpisode(episode));
+    characterEpisodes.forEach((episode) => showEpisodesbyCharacter(episode));
     characterDescriptionDetails.append(characterDetailName, characterMoreDetailsContainer);
     characterDescription.textContent = "";
     characterDescription.append(characterDetailImg, characterDescriptionDetails);
@@ -58,23 +56,22 @@ export function showingExtendedCharacterInfo(character) {
         mainContainer.append(characterDescription);
     }
 }
-export function callingOneEpisode(episode) {
+export function showEpisodesbyCharacter(url) {
     return __awaiter(this, void 0, void 0, function* () {
-        const responseEpisode = yield fetch(episode);
-        const dataEpisode = yield responseEpisode.json();
-        const oneEpisode = dataEpisode;
-        showingEpisodesInfo(oneEpisode);
+        const episode = yield getEpisode(url);
+        if (!episode)
+            return;
+        showEpisodeInfo(episode);
     });
 }
-export function showingEpisodesInfo(episode) {
+export function showEpisodeInfo(episode) {
     const episodeDetailContainer = document.createElement("div");
     episodeDetailContainer.className = "episode-detail__container";
     episodeDetailContainer.id = `${episode.id}`;
     const episodeNumber = document.createElement("p");
     episodeNumber.className = "episode-name";
     episodeNumber.addEventListener("click", (event) => {
-        console.log('ariadna');
-        handleClick(event, episode.url);
+        handleEpisodeClick(event, episode.url);
     });
     episodeNumber.id = `${episode.id}`;
     episodeNumber.textContent = `Episode ${episode.id}`;
@@ -90,6 +87,6 @@ export function handleLocationClick(event, url) {
     const target = event.target;
     if (!(target instanceof HTMLElement))
         return;
-    callingOneLocation(url);
+    showLocation(url);
 }
 //# sourceMappingURL=characterDetail.js.map
