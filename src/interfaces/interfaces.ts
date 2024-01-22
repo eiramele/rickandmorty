@@ -1,17 +1,29 @@
+
+export enum Status {
+  Alive = "Alive",
+  Dead = "Dead",
+  unknown = "unknown",
+}
+
+export enum Gender {
+  Male = "Male",
+  Female = "Female",
+  unknown = "unknown",
+}
+
 export interface Character {
   id: number;
   name: string;
-  status: string;
+  status: Status;
   species: string;
   image: string;
-  
 }
 
-export interface ExtendedCharacter extends Character{
+export interface ExtendedCharacter extends Character {
   origin: Location;
   location: Location;
   episode: string[];
-  gender: string;
+  gender: Gender;
 }
 
 export interface Episode {

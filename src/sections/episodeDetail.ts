@@ -1,35 +1,17 @@
 import {
   Character,
   Episode,
-} from "interfaces/interfaces.js";
-import { callingOneEpisode } from "./characterDetail.js";
+  Status,
+} from "../interfaces/interfaces.js";
+
 import {
   mainContainer,
   characterListContainer,
-} from "../variables/globalConst.js";
+} from "../variables/domElements.js";
 
 import { showExtendedCharacterInfo } from "./characterDetail.js";
 import { getCharacter, getEpisode } from "../rmAPI.js";
 
-//Gets all characters that appear in a single episode and prints its details
-export async function showCharactersbyEpisode(url: string) {
-
-  const episode = await getEpisode(url);
-  if (!episode) return 
-  
-  characterListContainer.textContent = "";
-  
-  if (
-    mainContainer instanceof HTMLDivElement &&
-    characterListContainer instanceof HTMLDivElement
-  ) {
-    mainContainer.append(characterListContainer);
-  }
-  console.log(episode.characters);
-  episode.characters.forEach((character) => {
-    showCharacter(character);
-  });
-}
 
 //Gets episode Info and shows it
 export async function showEpisodeInfo(url: string) {
@@ -52,7 +34,22 @@ export function createEpisodeCard(episode: Episode) {
   }
 }
 
-// Gets characther info and prints it
+//Gets all characters that appear in a single episode and prints its details
+export async function showCharactersbyEpisode(url: string) {
+
+  const episode = await getEpisode(url);
+  if (!episode) return 
+  
+  characterListContainer.textContent = "";
+  
+ 
+  episode.characters.forEach((character) => {
+    showCharacter(character);
+  });
+}
+
+
+// Gets one single characther info and prints it
 export async function showCharacter(url: string) {
   const character = await getCharacter(url);
   if (!character) return;
@@ -77,12 +74,22 @@ export function createCharacterCard(character: Character) {
 
   const characterGender = document.createElement("p");
   characterGender.className = "character-gender";
-  characterGender.textContent = `${character.species} | ${character.status}`;
+  characterGender.textContent = `${character.species} | ${Status[character.status]}`;
 
   characterItem.append(characterImg, characterName, characterGender);
 
+  
+  
   if (characterListContainer instanceof HTMLDivElement) {
     characterListContainer.append(characterItem);
+  }
+  
+  
+  if (
+    mainContainer instanceof HTMLDivElement &&
+    characterListContainer instanceof HTMLDivElement
+  ) {
+    mainContainer.append(characterListContainer);
   }
 }
 

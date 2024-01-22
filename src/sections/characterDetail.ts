@@ -2,9 +2,11 @@ import {
   Character,
   Episode,
   ExtendedCharacter,
+  Gender,
+  Status,
 } from "../interfaces/interfaces.js";
 import { getEpisode } from "../rmAPI.js";
-import { mainContainer } from "../variables/globalConst.js";
+import { mainContainer } from "../variables/domElements.js";
 import { handleEpisodeClick } from "./episodeList.js";
 import { showLocation } from "./locationDetail.js";
 
@@ -33,16 +35,16 @@ export function showExtendedCharacterInfo(character: Character) {
 
   const characterMoreDetailsContainer = document.createElement("div");
   characterMoreDetailsContainer.className =
-    "character-more-details__container, preserve-spaces";
+    "character-more-details__container preserve-spaces";
 
   const characterDetailSpecies = document.createElement("span");
   characterDetailSpecies.textContent = ` ${extendedCharacter.species} | `;
 
   const characterDetailStatus = document.createElement("span");
-  characterDetailStatus.textContent = ` ${extendedCharacter.status} | `;
+  characterDetailStatus.textContent = ` ${Status[extendedCharacter.status]} | `;
 
   const characterDetailGender = document.createElement("span");
-  characterDetailGender.textContent = ` ${extendedCharacter.gender} `;
+  characterDetailGender.textContent = ` ${Gender[extendedCharacter.gender]} `;
 
   characterMoreDetailsContainer.append(
     characterDetailSpecies,
