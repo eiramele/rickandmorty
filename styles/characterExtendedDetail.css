@@ -1,5 +1,6 @@
 .character-detail-item {
   display: flex;
+
   
 }
 
@@ -17,6 +18,7 @@
 }
 .character-more-details__container {
   display: flex;
+
 }
 
 .character-location{
@@ -43,3 +45,19 @@
   color: var(--second-color);
 }
 
+@media (max-width:425px){
+  .character-detail-item {
+    flex-direction: column;
+   
+    .character-more-details__container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  
+  .character-more-details__container{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+}

@@ -39,3 +39,12 @@
   background-color: var(--fourth-color);
   min-height: 2rem;
 }
+
+@media (max-width:425px){
+  .episodes-list__container {
+    min-width: 6rem;
+  }
+  .episodes-button{
+    max-width: 5rem;
+  }
+}

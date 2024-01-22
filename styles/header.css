@@ -22,4 +22,9 @@
 
 .header-list__item{
     list-style: none;
+    
+}
+
+.header-list__item:hover{
+    color: var(--second-text-color);
 }
