@@ -7,8 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { Gender, Status, } from "../interfaces/interfaces.js";
 import { getEpisode } from "../rmAPI.js";
-import { mainContainer } from "../variables/globalConst.js";
+import { mainContainer } from "../variables/domElements.js";
 import { handleEpisodeClick } from "./episodeList.js";
 import { showLocation } from "./locationDetail.js";
 import { characterDescription, characterListContainer, allEpisodesContainer, } from "../variables/domElements.js";
@@ -24,17 +25,17 @@ export function showExtendedCharacterInfo(character) {
     characterDetailName.textContent = extendedCharacter.name;
     const characterMoreDetailsContainer = document.createElement("div");
     characterMoreDetailsContainer.className =
-        "character-more-details__container, preserve-spaces";
+        "character-more-details__container preserve-spaces";
     const characterDetailSpecies = document.createElement("span");
-    characterDetailSpecies.textContent = ` ${extendedCharacter.species} | `;
+    characterDetailSpecies.textContent = ` Species: ${extendedCharacter.species} | `;
     const characterDetailStatus = document.createElement("span");
-    characterDetailStatus.textContent = ` ${extendedCharacter.status} | `;
+    characterDetailStatus.textContent = ` Status: ${Status[extendedCharacter.status]} | `;
     const characterDetailGender = document.createElement("span");
-    characterDetailGender.textContent = ` ${extendedCharacter.gender} `;
+    characterDetailGender.textContent = ` Gender: ${Gender[extendedCharacter.gender]} `;
     characterMoreDetailsContainer.append(characterDetailSpecies, characterDetailStatus, characterDetailGender);
     if (extendedCharacter.origin) {
         const characterDetailOrigin = document.createElement("span");
-        characterDetailOrigin.textContent = `| ${extendedCharacter.origin.name}`;
+        characterDetailOrigin.textContent = `| Origin: ${extendedCharacter.origin.name}`;
         characterMoreDetailsContainer.appendChild(characterDetailOrigin);
         if (extendedCharacter.origin.name != "unknown") {
             characterDetailOrigin.className = "character-location";

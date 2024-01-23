@@ -1,8 +1,4 @@
-import {
-  Character,
-  Episode,
-  Status,
-} from "../interfaces/interfaces.js";
+import { Character, Episode, Status } from "../interfaces/interfaces.js";
 
 import {
   mainContainer,
@@ -12,8 +8,7 @@ import {
 import { showExtendedCharacterInfo } from "./characterDetail.js";
 import { getCharacter, getEpisode } from "../rmAPI.js";
 
-
-//Gets episode Info and shows it
+//Function to get episode info and show it
 export async function showEpisodeInfo(url: string) {
   const episode = await getEpisode(url);
   if (!episode) return;
@@ -21,10 +16,10 @@ export async function showEpisodeInfo(url: string) {
   createEpisodeCard(episode);
 }
 
-//Creates html elements to print episode ID, air date and code
+//Function to create HTML elements to print episode ID, air date and code
 export function createEpisodeCard(episode: Episode) {
   const episodeNumber = document.createElement("h2");
-  episodeNumber.textContent = `Episode ${episode.id}`;
+  episodeNumber.textContent = `Episode ${episode.id}: ${episode.name}`;
 
   const episodeDate = document.createElement("p");
   episodeDate.textContent = `${episode.air_date} | ${episode.episode}`;
@@ -34,29 +29,26 @@ export function createEpisodeCard(episode: Episode) {
   }
 }
 
-//Gets all characters that appear in a single episode and prints its details
+//Function to get all characters that appear in a single episode and print its details
 export async function showCharactersbyEpisode(url: string) {
-
   const episode = await getEpisode(url);
-  if (!episode) return 
-  
+  if (!episode) return;
+
   characterListContainer.textContent = "";
-  
- 
+
   episode.characters.forEach((character) => {
     showCharacter(character);
   });
 }
 
-
-// Gets one single characther info and prints it
+// Function to get one single characther info and print it
 export async function showCharacter(url: string) {
   const character = await getCharacter(url);
   if (!character) return;
   createCharacterCard(character);
 }
 
-//Creates a card for each character including information such as name, image and gender
+//Function to create a card for each character including information such as name, image and gender
 export function createCharacterCard(character: Character) {
   const characterItem = document.createElement("div");
   characterItem.className = "character-item";
@@ -74,17 +66,16 @@ export function createCharacterCard(character: Character) {
 
   const characterGender = document.createElement("p");
   characterGender.className = "character-gender";
-  characterGender.textContent = `${character.species} | ${Status[character.status]}`;
+  characterGender.textContent = `${character.species} | ${
+    Status[character.status]
+  }`;
 
   characterItem.append(characterImg, characterName, characterGender);
 
-  
-  
   if (characterListContainer instanceof HTMLDivElement) {
     characterListContainer.append(characterItem);
   }
-  
-  
+
   if (
     mainContainer instanceof HTMLDivElement &&
     characterListContainer instanceof HTMLDivElement
@@ -93,8 +84,7 @@ export function createCharacterCard(character: Character) {
   }
 }
 
-
-
+//Function to handle click on character name to show character info
 export function handleCharacterClick(event: MouseEvent, character: Character) {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;

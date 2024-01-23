@@ -26,7 +26,6 @@ function createEpisodeListElement(episodes) {
         li.id = `${episode.id}`;
         li.setAttribute("data-episode", "");
         li.textContent = `Episode ${episode.id}`;
-        console.log(episode.url);
         li.addEventListener("click", (event) => handleEpisodeClick(event, episode.url));
         if (episodeListContainer instanceof HTMLUListElement) {
             episodeListContainer.appendChild(li);

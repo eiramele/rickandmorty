@@ -1,1 +1,1 @@
-{"version":3,"file":"interfaces.js","sourceRoot":"","sources":["../../src/interfaces/interfaces.ts"],"names":[],"mappings":""}
+{"version":3,"file":"interfaces.js","sourceRoot":"","sources":["../../src/interfaces/interfaces.ts"],"names":[],"mappings":"AACA,MAAM,CAAN,IAAY,MAIX;AAJD,WAAY,MAAM;IAChB,yBAAe,CAAA;IACf,uBAAa,CAAA;IACb,6BAAmB,CAAA;AACrB,CAAC,EAJW,MAAM,KAAN,MAAM,QAIjB;AAED,MAAM,CAAN,IAAY,MAIX;AAJD,WAAY,MAAM;IAChB,uBAAa,CAAA;IACb,2BAAiB,CAAA;IACjB,6BAAmB,CAAA;AACrB,CAAC,EAJW,MAAM,KAAN,MAAM,QAIjB"}

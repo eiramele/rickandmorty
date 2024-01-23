@@ -16,9 +16,7 @@ import {
   allEpisodesContainer,
 } from "../variables/domElements.js";
 
-
-
-//Creates HTML elements to show extendended character information 
+//Function to create HTML elements to show extendended character information
 export function showExtendedCharacterInfo(character: Character) {
   const extendedCharacter = character as ExtendedCharacter;
 
@@ -38,13 +36,17 @@ export function showExtendedCharacterInfo(character: Character) {
     "character-more-details__container preserve-spaces";
 
   const characterDetailSpecies = document.createElement("span");
-  characterDetailSpecies.textContent = ` ${extendedCharacter.species} | `;
+  characterDetailSpecies.textContent = ` Species: ${extendedCharacter.species} | `;
 
   const characterDetailStatus = document.createElement("span");
-  characterDetailStatus.textContent = ` ${Status[extendedCharacter.status]} | `;
+  characterDetailStatus.textContent = ` Status: ${
+    Status[extendedCharacter.status]
+  } | `;
 
   const characterDetailGender = document.createElement("span");
-  characterDetailGender.textContent = ` ${Gender[extendedCharacter.gender]} `;
+  characterDetailGender.textContent = ` Gender: ${
+    Gender[extendedCharacter.gender]
+  } `;
 
   characterMoreDetailsContainer.append(
     characterDetailSpecies,
@@ -54,7 +56,7 @@ export function showExtendedCharacterInfo(character: Character) {
   if (extendedCharacter.origin) {
     const characterDetailOrigin = document.createElement("span");
 
-    characterDetailOrigin.textContent = `| ${extendedCharacter.origin.name}`;
+    characterDetailOrigin.textContent = `| Origin: ${extendedCharacter.origin.name}`;
     characterMoreDetailsContainer.appendChild(characterDetailOrigin);
     if (extendedCharacter.origin.name != "unknown") {
       characterDetailOrigin.className = "character-location";
@@ -87,15 +89,14 @@ export function showExtendedCharacterInfo(character: Character) {
   }
 }
 
-// Shows all episoded where that character appears on
+// Function to show all episoded where that character appears on
 export async function showEpisodesbyCharacter(url: string) {
   const episode = await getEpisode(url);
   if (!episode) return;
   showEpisodeInfo(episode);
 }
 
-
-//Create HTML elements to print episode number and code
+//Function to create HTML elements to print episode number and code
 export function showEpisodeInfo(episode: Episode) {
   const episodeDetailContainer = document.createElement("div");
   episodeDetailContainer.className = "episode-detail__container";
@@ -120,7 +121,7 @@ export function showEpisodeInfo(episode: Episode) {
   }
 }
 
-//Handles click to show location information
+//Function to handle click on origin to show location information
 export function handleLocationClick(event: MouseEvent, url: string) {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;

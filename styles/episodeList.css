@@ -46,5 +46,11 @@
   }
   .episodes-button{
     max-width: 5rem;
+    min-height: 3rem;
+  }
+  
+  .button-disabled{
+    max-width: 5rem;
+    min-height: 3rem;
   }
 }

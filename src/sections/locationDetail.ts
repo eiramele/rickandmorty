@@ -1,11 +1,14 @@
 import { Location } from "../interfaces/interfaces.js";
-import { mainContainer } from "../variables/globalConst.js";
+
 import { showCharacter } from "./episodeDetail.js";
-import { characterListContainer } from "../variables/globalConst.js";
+import {
+  characterListContainer,
+  mainContainer,
+} from "../variables/domElements.js";
 import { getLocation } from "../rmAPI.js";
 
+//Function to show an specific location, including residents in that location.
 export async function showLocation(url: string) {
-
   const origin = await getLocation(url);
   if (!origin) return;
 
@@ -17,9 +20,10 @@ export async function showLocation(url: string) {
   ) {
     mainContainer.append(characterListContainer);
   }
-  origin.residents.forEach((resident) => showCharacter(resident));
+  origin.residents.forEach((resident: string) => showCharacter(resident));
 }
 
+//Function to create location details such as name, type and dimension
 export function createLocationCard(location: Location) {
   const locationDetailName = document.createElement("h2");
   locationDetailName.className = "location-detail-name";

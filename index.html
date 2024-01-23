@@ -11,36 +11,31 @@
     />
     <link rel="stylesheet" href="styles/styles.css" />
     <link
-    rel="shortcut icon"
-    href="assets/favicon.png"
-    alt="Calculator icon"
-  />
+      rel="shortcut icon"
+      href="assets/favicon.png"
+      alt="Rick Sanchez icon"
+    />
     <title>Rick and Morty</title>
   </head>
   <body>
     <header class="header__container">
-      <img class="header__image" src="assets/logo.png" />
-
-      <ul class="header-list__container">
-        <li class="header-list__item">Episodes</li>
-        <li class="header-list__item">Characters</li>
-        <li class="header-list__item">Locations</li>
-      </ul>
+      <img
+        class="header__image"
+        src="assets/logo.png"
+        alt="Rick and Morty Logo"
+      />
     </header>
     <main class="main-view">
       <section class="episodes-list__container">
         <h3>Episodes</h3>
-        <ul class="episodes-list" data-episodes-container>
-
-        </ul>
-        <button class="episodes-button" data-episodes-button>Load more episodes</button>
+        <ul class="episodes-list" data-episodes-container></ul>
+        <button class="episodes-button" data-episodes-button>
+          Load more episodes
+        </button>
       </section>
-      <div class="episode-detail" data-main-container>
-
-      </div>
+      <div class="episode-detail" data-main-container></div>
     </main>
 
-    <script src="dist/main.js" type="module" ></script>
-    
+    <script src="dist/main.js" type="module"></script>
   </body>
 </html>

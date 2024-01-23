@@ -7,9 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { mainContainer } from "../variables/globalConst.js";
 import { showCharacter } from "./episodeDetail.js";
-import { characterListContainer } from "../variables/globalConst.js";
+import { characterListContainer, mainContainer, } from "../variables/domElements.js";
 import { getLocation } from "../rmAPI.js";
 export function showLocation(url) {
     return __awaiter(this, void 0, void 0, function* () {

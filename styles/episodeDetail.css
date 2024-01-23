@@ -15,6 +15,7 @@
     gap: 1rem;
     flex-wrap: wrap;
     padding-top: 2rem;
+    
 }
 
 .character-item{
@@ -52,6 +53,10 @@
 @media(max-width:425px) {
     .episode-detail{
         padding-left: 0.5rem;
+    }
+    
+    .characters__container{
+        padding-left: 2rem;
     }
     
 }

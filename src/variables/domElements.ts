@@ -18,3 +18,6 @@ characterDescription.className = "character-detail-item";
 
 export const allEpisodesContainer = document.createElement("div");
 allEpisodesContainer.className = "all-episodes__container";
+
+export const headerCharacters = document.querySelector("[data-all-characters]")
+

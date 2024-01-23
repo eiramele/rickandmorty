@@ -16,7 +16,7 @@ export function getEpisodes(url) {
             return episodes;
         }
         catch (error) {
-            console.error(error);
+            console.error('Error loading content', error);
             return null;
         }
     });
@@ -30,7 +30,7 @@ export function getEpisode(url) {
             return episode;
         }
         catch (error) {
-            console.error(error);
+            console.error('Error loading content', error);
             return null;
         }
     });
@@ -44,7 +44,7 @@ export function getCharacter(url) {
             return character;
         }
         catch (error) {
-            console.error(error);
+            console.error('Error loading content', error);
             return null;
         }
     });
@@ -58,7 +58,21 @@ export function getLocation(url) {
             return origin;
         }
         catch (error) {
-            console.error(error);
+            console.error('Error loading content', error);
+            return null;
+        }
+    });
+}
+export function getLocations(page) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`https://rickandmortyapi.com/api/location?page=${page}`);
+            const data = yield response.json();
+            const locations = data.results;
+            return locations;
+        }
+        catch (error) {
+            console.error('Error loading content', error);
             return null;
         }
     });

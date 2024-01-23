@@ -15,7 +15,7 @@ import { getEpisodes } from "../rmAPI.js";
 import { Episode } from "../interfaces/interfaces.js";
 
 
-//Calls all episodes and prints a list with all episodes
+//Function to calls all episodes and print a list with all episodes
 export async function showEpisodesList(url: string) {
    const episodes = await getEpisodes(url);
     if (!episodes) return;
@@ -25,7 +25,7 @@ export async function showEpisodesList(url: string) {
 }
 
 
-// For each episode, creates an element list
+// Function to create an element list for each episode
 function createEpisodeListElement(episodes: Episode[]  ){
   episodes.forEach((episode) => {
     const li = document.createElement("li");
@@ -33,7 +33,7 @@ function createEpisodeListElement(episodes: Episode[]  ){
     li.id = `${episode.id}`;
     li.setAttribute("data-episode", "");
     li.textContent = `Episode ${episode.id}`;
-    console.log(episode.url);
+    
     li.addEventListener("click", (event) => handleEpisodeClick(event, episode.url)); //url
     if (episodeListContainer instanceof HTMLUListElement) {
       episodeListContainer.appendChild(li);
@@ -42,7 +42,7 @@ function createEpisodeListElement(episodes: Episode[]  ){
 
 }
 
-// Handle click on any episode from the list
+// Function to handle click on any episode from the list
 export function handleEpisodeClick(event: MouseEvent, url: string) {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;
@@ -55,7 +55,7 @@ export function handleEpisodeClick(event: MouseEvent, url: string) {
   showCharactersbyEpisode(url);
 }
 
-//Loads more episodes when button is clicked
+//Function to load more episodes when button is clicked
 export async function loadMoreEpisodes() {
   try {
     const lastElement = episodeListContainer.lastElementChild;
