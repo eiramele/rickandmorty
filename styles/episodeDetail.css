@@ -1,0 +1,62 @@
+.episode-detail{
+    padding-left: 2rem;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.episode-detail__container{
+    min-width: 7rem;
+}
+
+.characters__container{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    
+}
+
+.character-item{
+    display: flex;
+    flex-direction: column;
+    width: 8rem;
+    padding: 0.5rem;
+    border: solid var(--text-color) 0.1rem;
+   
+}
+
+.character-image{
+    height: 7rem;
+    width: 7rem;
+    align-self: center;
+    
+}
+
+.character-name{
+    align-self: center;
+    text-align: center;
+    margin-bottom:0.2rem
+}
+
+.character-name:hover{
+    cursor: pointer;
+    color: var(--second-text-color) ;
+}
+
+.character-gender{
+    align-self: center;
+    text-align: center;
+}
+
+@media(max-width:425px) {
+    .episode-detail{
+        padding-left: 0.5rem;
+    }
+    
+    .characters__container{
+        padding-left: 2rem;
+    }
+    
+}

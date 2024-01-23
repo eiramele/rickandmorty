@@ -1,0 +1,56 @@
+.episodes-list__container {
+  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  max-height: 40rem;
+  min-width: 10rem;
+  overflow-y: auto;
+  color: var(--text-color);
+}
+
+.episodes-list {
+  padding-left: 0;
+}
+
+.episode-item {
+  list-style: none;
+  
+  cursor: pointer;
+  
+  padding-bottom: 0.3rem;
+}
+
+.episode-item:hover {
+  color: var(--second-text-color);
+  text-decoration: underline;
+}
+
+.episodes-button {
+  background-color: var(--fifth-color-dark); 
+  color: var(--fourth-color);
+  min-height: 2rem;
+  
+}
+
+.button-disabled{
+  background-color: var(--fourth-color);
+  min-height: 2rem;
+}
+
+@media (max-width:425px){
+  .episodes-list__container {
+    min-width: 6rem;
+  }
+  .episodes-button{
+    max-width: 5rem;
+    min-height: 3rem;
+  }
+  
+  .button-disabled{
+    max-width: 5rem;
+    min-height: 3rem;
+  }
+}
